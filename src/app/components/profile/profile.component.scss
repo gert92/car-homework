@@ -1,0 +1,34 @@
+@import "/src/styles.scss";
+
+.signup {
+  padding: 2em;
+  border-radius: 10px;
+  background-color: $secondaryColor;
+  color: $gray;
+}
+
+input {
+  background-color: lighten($color: $secondaryColor, $amount: 3);
+  padding: 5px;
+  color: $gray;
+  width: 100px;
+  border-radius: 5px;
+}
+
+button {
+  border-radius: 5px;
+  padding: 5px;
+  color: $lightGray;
+}
+
+p {
+  color: $gray;
+}
+
+a {
+  text-decoration: underline;
+}
+
+.register {
+  position: relative;
+}

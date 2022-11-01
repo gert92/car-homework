@@ -1,0 +1,15 @@
+@import "/src/styles.scss";
+
+li {
+    a {
+        text-decoration: underline;
+        color: $primaryColor;
+    }
+
+}
+
+.sign-out {
+    background-color: lighten($color: $secondaryColor, $amount: 2);
+    padding: 1px 5px 1px 5px;
+    cursor: pointer;
+}

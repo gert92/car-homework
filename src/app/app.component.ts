@@ -1,10 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from './services/auth.service';
+import { User } from './types/types';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'car-homework';
+export class AppComponent implements OnInit {
+  private token: string = localStorage.getItem('token')!;
+
+  constructor(private authservice: AuthService) {}
+
+  ngOnInit(): void {
+    console.log('app on init running');
+
+    if (this.token) {
+      console.log('inside token running');
+     this.authservice.auth(this.token);
+    }
+  }
 }

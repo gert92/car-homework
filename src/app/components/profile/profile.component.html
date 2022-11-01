@@ -1,0 +1,123 @@
+<app-nav></app-nav>
+<div class="register py-20 flex items-center justify-center">
+
+    <div class="container mx-auto my-5 p-5">
+        <div class="md:flex no-wrap md:-mx-2 ">
+            <!-- Left Side -->
+            <div class="w-full md:w-3/12 md:mx-2">
+                <!-- Profile Card -->
+                <div class="bg-white p-3 border-t-4 b-primary">
+                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{user.username}}</h1>
+                    <ul
+                        class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
+                        <li class="flex items-center py-3">
+                            <span>Balance</span>
+                            <span class="ml-auto"><input class="bg-primary py-1 px-2 rounded text-white text-sm"
+                                    [formControl]="balance" /></span>
+                        </li>
+                        <li class="flex items-center py-3">
+                            <span>Member since</span>
+                            <span class="ml-auto">{{createdAt}}</span>
+                        </li>
+                        <li class="flex items-center py-3">
+                            <button (click)="handleUpdate()" class="w-full bg-primary text-white">Save</button>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End of profile card -->
+            </div>
+
+            <!-- Right Side -->
+            <div class="w-full md:w-9/12 mx-2 ">
+
+                <!-- Profile tab -->
+                <!-- About Section -->
+                <div class="bg-white p-3 shadow-sm rounded-sm">
+                    <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
+                        <span clas="text-green-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                style="fill: rgba(0, 0, 0, 1);transform: msFilter">
+                                <path
+                                    d="M3 19.723V21a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.277A1.99 1.99 0 0 0 22 18v-3c0-.831-.507-1.542-1.228-1.845l-1.368-4.104A2.995 2.995 0 0 0 16.559 7H7.441a2.995 2.995 0 0 0-2.845 2.051l-1.368 4.104A2.001 2.001 0 0 0 2 15v3c0 .738.404 1.376 1 1.723zM5.5 18a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 5.5 18zm13 0a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 18.5 18zM7.441 9h9.117a1 1 0 0 1 .949.684L18.613 13H5.387l1.105-3.316c.137-.409.519-.684.949-.684z">
+                                </path>
+                                <path
+                                    d="M22 7.388V5.279l-9.684-3.228a.996.996 0 0 0-.658.009L2 5.572V7.7l10.015-3.642L22 7.388z">
+                                </path>
+                            </svg>
+                        </span>
+                        <span class="tracking-wide">My Cars</span>
+                    </div>
+                    <div class="my-4"></div>
+                    <div *ngFor="let car of myCars" class="lg:p-4 border-2 border-gray-200 border-opacity-60 rounded-lg lg:flex">
+                        <img class="lg:h-24 md:h-48 object-cover object-center" src="{{car.attributes.imageUrl}}"
+                            alt="blog cover" />
+
+                        <div class="p-4 w-full">
+                            <h2 class="tracking-widest text-xs title-font font-bold text-green-400 mb-1 uppercase ">
+                                ${{car.attributes.price}}</h2>
+                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{car.attributes.brand}}
+                                {{car.attributes.model}}</h1>
+                            <div class="flex items-center flex-wrap justify-between ">
+
+                                <p class="inline-flex items-center">{{car.attributes.details.motor}} |
+                                    {{car.attributes.details.gearbox}} | {{car.attributes.details.drivetrain}}</p>
+
+                                <button class="mr-3 inline-flex items-center  lg:ml-auto md:ml-0 ml-auto leading-none text-sm p-3 py-1">
+                                    Sell
+                                </button>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End of about section -->
+
+                <div class="my-4"></div>
+                <div *ngFor="let alert of alerts" class="flex  rounded-lg p-4 mb-4 text-sm {{alert.type}} alert"
+                    role="alert">
+                    <svg class="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <div>
+                        <span class="font-medium">{{alert.msg}}</span>
+                    </div>
+                </div>
+                <!-- End of profile tab -->
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- <div class="signup">
+        <div *ngFor="let alert of alerts" class="flex  rounded-lg p-4 mb-4 text-sm {{alert.type}} alert" role="alert">
+            <svg class="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    clip-rule="evenodd"></path>
+            </svg>
+            <div>
+                <span class="font-medium">{{alert.msg}}</span>
+            </div>
+        </div>
+        <h6 class="mb-5">Profile</h6>
+        <div class="form flex flex-col gap-5 mb-5">
+            <label class="flex flex-col">Username
+                <input type="text" value="{{user.username}}" disabled>
+            </label>
+            <label class="flex flex-col">Email
+                <input type="text" value="{{user.email}}" disabled>
+            </label>
+            <label class="flex flex-col">Balance
+                <input type="text" [formControl]="balance">
+            </label>
+            <button (click)="handleUpdate()">Update</button>
+
+        </div>
+    </div> -->
+</div>

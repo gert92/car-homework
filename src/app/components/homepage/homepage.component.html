@@ -1,0 +1,61 @@
+<app-nav></app-nav>
+
+<section class="cta">
+    <div class="cta-wrapper grid grid-cols-2 container mx-auto">
+        <div class="cta-left p-5 my-20">
+            <h1>Audi R8 2022</h1>
+            <h1><span class="primary">$122999</span></h1>
+            <p class="my-3 mix-blend-color-burn">The 2022 Audi R8 finishes near the top of our luxury sports car
+                rankings. It
+                has the breathtaking performance you expect from cars in this class, as well as a premium interior and
+                easy-to-use technology.</p>
+            <!-- <button class="p-2 px-3 my-3" (click)="logData()">Learn more</button> -->
+            <button class="p-2 px-3 my-3">Learn more</button>
+        </div>
+        <div class="cta-right grid items-center justify-end">
+            <div class="searchbox flex flex-col p-5 w-60 h-max">
+                <h6 class="text-center mb-5">Search for a car</h6>
+                <select class="my-3" name="brand" [value]="selectedBrand">
+                    <!-- <option value="">Brand</option> -->
+                    <option *ngFor="let brand of brands" value="{{brand}}">{{brand}}</option>
+                </select>
+                <select class="my-3" name="brand" [value]="selectedModel">
+                    <option *ngFor="let model of models" value="{{model}}">{{model}}</option>
+                </select>
+                <select class="my-3" name="year" [value]="selectedYear">
+                    <option *ngFor="let year of years" value="{{year}}">{{year}}</option>
+                </select>
+                <button class="p-2 px-3 mt-3">Search</button>
+            </div>
+        </div>
+    </div>
+</section>
+<main class="container mx-auto">
+    <section class="bleed-secondary py-10" id="cars">
+        <h2 class="text-center mb-5">Lets find your perfect car</h2>
+        <div class="carlist grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3  gap-5">
+            <div class="carlisting w-40 flex flex-col justify-between" *ngFor="let car of cars">
+                <a routerLinkActive="active" routerLink="/cars/{{car.id}}">
+                    <div class="carlisting-img">
+                        <div class="carlisting-info">
+                            <div class="carlisting-info-tab">
+                                {{car.attributes.details.gearbox}}
+                            </div>
+                            <div class="carlisting-info-tab">
+                                {{car.attributes.details.motor}}
+                            </div>
+                            <div class="carlisting-info-tab">
+                                {{car.attributes.details.drivetrain}}
+                            </div>
+                        </div>
+                        <img class="mb-2 carimg" src="{{car.attributes.imageUrl}}" alt="test">
+                    </div>
+                    <div class="carlisting-data">
+                        <h3>{{car.attributes.brand}} {{car.attributes.model}} - {{car.attributes.year}}</h3>
+                        <h3 class="price">${{car.attributes.price}}</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>

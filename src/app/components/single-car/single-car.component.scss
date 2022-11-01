@@ -1,0 +1,65 @@
+@import "/src/styles.scss";
+
+.single-car-wrapper {
+  background-color: $lightGray;
+}
+
+.single-car {
+  background-color: #fff;
+  position: relative;
+}
+
+.car-pricetag {
+  background-color: $secondaryColor;
+  p {
+    color: $lightGray;
+    font-size: 1.5em;
+    font-weight: 600;
+    display: flex;
+    gap: 10px;
+  }
+}
+
+h2 {
+  font-weight: 800;
+  font-size: 1.5em;
+  letter-spacing: 0.5px;
+}
+
+.car-main-left {
+  p {
+    display: flex;
+    flex-basis: 30%;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 0.8em;
+    span {
+      justify-self: end;
+      flex-basis: 70%;
+      color: $gray;
+    }
+  }
+}
+
+button {
+  color: $lightGray;
+  font-weight: 600;
+  font-size: 0.8em;
+  letter-spacing: 0.5px;
+}
+
+input {
+  border: 1px solid darken($color: #fff, $amount: 5);
+  border-radius: 5px;
+  width: 100%;
+  padding: 4px;
+}
+
+.car-pricetag {
+  input {
+    background-color: $secondaryColor;
+    color: $lightGray;
+    border: 1px solid lighten($color: $secondaryColor, $amount: 5);
+    padding: 4px;
+  }
+}

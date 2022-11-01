@@ -1,0 +1,18 @@
+<div class="register h-screen flex items-center justify-center">
+    <div class="signup">
+        <h6 class="mb-5">Sign Up</h6>
+        <div class="form flex flex-col gap-5 mb-5">
+            <label class="flex flex-col">Username
+                <input type="text" [formControl]="username">
+            </label>
+            <label class="flex flex-col">Email
+                <input type="text" [formControl]="email">
+            </label>
+            <label class="flex flex-col">Password
+                <input type="password" [formControl]="password">
+            </label>
+            <button (click)="handleRegister()">Sign Up</button>
+        </div>
+        <p>Already a user? <a routerLinkActive="active" routerLink="/login">LOGIN</a></p>
+    </div>
+</div>

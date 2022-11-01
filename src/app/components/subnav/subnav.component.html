@@ -1,0 +1,9 @@
+<div class="subnav pt-3">
+    <div class="flex justify-end">
+        <ul class="admin-menu flex gap-2">
+            <li *ngIf="currentRoute === ''" class="admin-menu-item">Add a car</li>
+            <li (click)="editCar()" *ngIf="currentRoute === 'cars/:id'" class="admin-menu-item">Edit</li>
+            <li *ngIf="currentRoute === 'cars/:id'" class="admin-menu-item">Delete</li>
+        </ul>
+    </div>
+</div>

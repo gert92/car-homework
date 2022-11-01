@@ -1,1 +1,199 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$primaryColor: #00abb3;
+$secondaryColor: #1b1a17;
+$gray: #b2b2b2;
+$lightGray: #eaeaea;
+
+.primary {
+  color: $primaryColor;
+}
+
+.bg-primary {
+  background-color: $primaryColor;
+}
+
+.b-primary{
+  border-color: $primaryColor;
+}
+
+li {
+  user-select: none;
+}
+
+button {
+  background-color: $primaryColor;
+  color: $secondaryColor;
+}
+
+header {
+  background-color: $secondaryColor;
+  color: $lightGray;
+}
+
+h1 {
+  color: $secondaryColor;
+  font-size: 2.5em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+h2 {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+h3 {
+  font-weight: 600;
+  font-size: 0.7em;
+}
+
+footer {
+  background-color: $secondaryColor;
+  // background-image: url('assets/audi3.jpg');
+  // background-position: center;
+  // background-repeat: no-repeat;
+  // background-size: cover;
+
+  .menu {
+    font-size: 0.8em;
+  }
+}
+
+.carlisting-img {
+  position: relative;
+  img {
+    object-fit: contain;
+    height: auto;
+    width: 100%;
+  }
+}
+
+.carlisting {
+  &:hover {
+    cursor: pointer;
+    .carlisting-info {
+      height: 100%;
+    }
+  }
+}
+
+li {
+  a {
+    text-decoration: underline;
+    color: $primaryColor;
+  }
+}
+
+.alert {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  // opacity: 1;
+  // background-color: $secondaryColor;
+}
+
+.danger {
+  background-color: rgb(254 226 226);
+  color: rgb(185 28 28);
+}
+
+.success {
+  background-color: rgb(220 252 231);
+  color: rgb(21 128 61);
+}
+
+.carlisting-info {
+  // background-color: $primaryColor;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: 0.5s ease;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  position: absolute;
+  word-wrap: break-word;
+  user-select: none;
+  height: 0;
+  width: 100%;
+}
+
+.carlisting-info-tab {
+  background-color: $primaryColor;
+  //   text-align: center;
+  font-size: 0.8em;
+  color: #000;
+  opacity: 0.6;
+  padding: 5px;
+  height: 100%;
+}
+
+#cars {
+  background-color: $lightGray;
+}
+
+.price {
+  color: $primaryColor;
+}
+
+.social-icon {
+  background-color: $lightGray;
+  max-width: fit-content;
+  border-radius: 500%;
+  padding: 4px;
+}
+
+h6 {
+  color: $lightGray;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.menu {
+  color: $lightGray;
+}
+
+p {
+  color: $secondaryColor;
+}
+
+select {
+  background-color: lighten($color: $secondaryColor, $amount: 3);
+  padding: 5px;
+  color: $gray;
+}
+
+.bleed {
+  box-shadow: 0 0 0 100vmax $secondaryColor;
+  clip-path: inset(0 -100vmax);
+}
+
+.bleed-secondary {
+  box-shadow: 0 0 0 100vmax $lightGray;
+  clip-path: inset(0 -100vmax);
+}
+
+.full-width {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.cta {
+  background-image: url("assets/audi2.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: local;
+}
+
+.searchbox {
+  background-color: $secondaryColor;
+}

@@ -1,0 +1,6 @@
+//HEROKU
+export const API_URL = 'https://car-homework-api.herokuapp.com/api/';
+export const API_TOKEN = 'e1b0d01358a7a539380a6075aa24f87d782147994df917e1f65db8bb9b8b27353f5100aa4a199d1593a026798f8e716959a120d8f0dd3505713b848af285b8ae692db992f26ba9d61821b2bfde4e92b690dd44cf0c68966c47326abc3695a9eafaa5899e82c74d9532b81ed66e4dfa80356a58f7bb0cb34bca3cdb2139b608b0'
+//LOCALHOST
+// export const API_TOKEN = 'fe89eaf700ad9bfcac0e27daab466aaa831e6a0e63d010747bbac132fb1b790ed0990abf325ae22c57647ce996d88a68948c789e5af3bc2b092f61a69ee81dba5cdbd4d3a72926a0aa6af643c719c529a256c9177d8befb9773f8e9870ba6576f3fe780fbc2bf3d0ee29af5de18754fd6d7116b20516e42199705a10b812e565'
+// export const API_URL = 'http://localhost:1337/api/';
