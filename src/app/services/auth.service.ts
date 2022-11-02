@@ -1,12 +1,8 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable } from 'rxjs';
 import { API_TOKEN, API_URL } from '../config';
+import { handleError } from '../error';
 import { Car, Login, User } from '../types/types';
 
 const httpOptions = {
@@ -32,31 +28,18 @@ export class AuthService {
 
   currentUser = new BehaviorSubject<User>({ id: 0 });
 
-  private handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      console.log('An Error Ocurred');
-    } else if (error.status === 401) {
-      localStorage.clear();
-      location.reload();
-    } else {
-      console.error(
-        `Backend returned code ${error.status}, body was: `,
-        error.error
-      );
-    }
-    return throwError(
-      () => new Error('Something bad happened; please try again later.')
-    );
-  }
-
   constructor(private http: HttpClient) {}
 
   register(user: User): Observable<User> {
-    return this.http.post<User>(this.registerUrl, user, httpOptions);
+    return this.http
+      .post<User>(this.registerUrl, user, httpOptions)
+      .pipe(catchError(handleError));
   }
 
   login(login: Login): Observable<User> {
-    return this.http.post<User>(this.loginUrl, login);
+    return this.http
+      .post<User>(this.loginUrl, login)
+      .pipe(catchError(handleError));
   }
 
   logout(): void {
@@ -76,13 +59,13 @@ export class AuthService {
 
     return this.http
       .get<User>(this.meUrl, customHttpOptions)
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(handleError));
   }
 
   getCurrentUser(): Observable<User> {
     const token: string = localStorage.getItem('token')!;
     if (token) {
-      return this.auth(token).pipe(catchError(this.handleError));
+      return this.auth(token).pipe(catchError(handleError));
     }
     return this.currentUser;
   }

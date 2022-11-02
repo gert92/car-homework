@@ -14,7 +14,7 @@ export type Car = {
       };
     };
   };
-  id: number;
+  id?: number;
   attributes: {
     brand: string;
     model: string;
@@ -51,6 +51,6 @@ export type Login = {
 };
 
 export type Alert = {
-  msg: string;
-  type: string;
+  msg?: string;
+  type?: string;
 };

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { identity, Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { CarService } from 'src/app/services/car.service';
 import { Car, User } from 'src/app/types/types';
@@ -12,14 +12,15 @@ import { Car, User } from 'src/app/types/types';
 })
 export class HomepageComponent implements OnInit {
   cars: Car[] = [];
+  filteredCars!: Car[];
   brands: string[] = [];
   models: string[] = [];
   years: string[] = [];
   currentUser: User = { id: 0 };
 
-  selectedBrand: string = 'Brand';
-  selectedModel: string = 'Model';
-  selectedYear: string = 'Year';
+  selectedBrand = new FormControl('', [Validators.required]);
+  selectedModel = new FormControl('', [Validators.required]);
+  selectedYear = new FormControl('', [Validators.required]);
 
   constructor(
     private carService: CarService,
@@ -28,27 +29,73 @@ export class HomepageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getCars();
+    this.selectedModel.disable();
+    this.selectedYear.disable();
+    this.activatedRoute.data.subscribe(({ cars }) => {
+      this.cars = cars.data;
+      this.cars.map((car) => {
+        if (!this.brands.includes(car.attributes.brand)) {
+          this.brands.push(car.attributes.brand);
+        }
+      });
+    });
   }
+
+  brandChange(): void {
+    if (this.selectedBrand.valid) {
+      this.models = [];
+      this.years = [];
+      this.selectedModel.reset();
+      this.selectedYear.reset();
+      this.cars.map((car) => {
+        if (
+          !this.models.includes(car.attributes.model) &&
+          car.attributes.brand === this.selectedBrand.value
+        ) {
+          this.models.push(car.attributes.model);
+        }
+      });
+      this.selectedModel.enable();
+    }
+  }
+
+  modelChange(): void {
+    if (this.selectedModel.valid) {
+      this.years = [];
+      this.selectedYear.reset();
+      this.cars.map((car) => {
+        if (
+          !this.years.includes(car.attributes.year) &&
+          car.attributes.model === this.selectedModel.value
+        ) {
+          this.years.push(car.attributes.year);
+        }
+      });
+      this.selectedYear.enable();
+    }
+  }
+
+  yearChange(): void {}
 
   logout(): void {
     this.authService.logout();
     location.reload();
   }
 
-  // getUser(): Observable<User> {
-  //   return this.authService.currentUser;
-  // }
-
-  getCars(): void {
-    this.carService.getCars().subscribe((cars) => {
-      this.cars = cars.data;
-      
-      this.cars.map((car) => {
-        this.brands.push(car.attributes.brand);
-        this.models.push(car.attributes.model);
-        this.years.push(car.attributes.year);
+  handleSearch(): void {
+    if (
+      this.selectedBrand.valid &&
+      this.selectedModel.valid &&
+      this.selectedYear.valid
+    ) {
+      this.carService.getCars().subscribe((cars) => {
+        this.filteredCars = cars.data.filter(
+          (car: Car) =>
+            car.attributes.brand === this.selectedBrand.value &&
+            car.attributes.model === this.selectedModel.value &&
+            car.attributes.year === this.selectedYear.value
+        );
       });
-    });
+    }
   }
 }

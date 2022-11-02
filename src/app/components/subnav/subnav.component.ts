@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from 'src/app/services/car.service';
-import { User } from 'src/app/types/types';
+import { Car, User } from 'src/app/types/types';
 
 @Component({
   selector: 'app-subnav',
@@ -12,7 +12,11 @@ export class SubnavComponent implements OnInit, OnDestroy {
   @Input() user!: User;
   currentRoute!: string;
 
-  constructor(private route: ActivatedRoute, private carService: CarService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private carService: CarService,
+    private router: Router
+  ) {}
   ngOnDestroy(): void {
     this.carService.isEditing.next(false);
   }
@@ -26,5 +30,13 @@ export class SubnavComponent implements OnInit, OnDestroy {
 
   editCar(): void {
     this.carService.isEditing.next(!this.carService.getIsEditing().value);
+  }
+
+  deleteCar(): void {
+    this.carService
+      .deleteCar(this.route.snapshot.params['id'])
+      .subscribe(() => {
+        this.router.navigate(['/']);
+      });
   }
 }

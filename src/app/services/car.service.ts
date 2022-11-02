@@ -8,8 +8,7 @@ import { Car } from '../types/types';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    Authorization:
-    'Bearer ' + API_TOKEN,
+    Authorization: 'Bearer ' + API_TOKEN,
   }),
   params: {
     populate: '*',
@@ -38,8 +37,7 @@ export class CarService {
     const customHttp = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization:
-        'Bearer ' + API_TOKEN,
+        Authorization: 'Bearer ' + API_TOKEN,
       }),
       params: new HttpParams({
         fromString: 'filters[users]=' + id + '&populate=details',
@@ -53,8 +51,17 @@ export class CarService {
     return this.isEditing;
   }
 
+  createCar(car: any): Observable<Car> {
+    const data = { data: { ...car } };
+    return this.http.post<Car>(this.carsUrl, data, httpOptions);
+  }
+
   updateCar(car: any): Observable<Car> {
     const data = { data: { ...car } };
     return this.http.put<Car>(this.carsUrl + car.id, data, httpOptions);
+  }
+
+  deleteCar(carId: number): Observable<unknown> {
+    return this.http.delete(this.carsUrl + carId, httpOptions);
   }
 }

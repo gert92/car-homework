@@ -15,17 +15,18 @@
         <div class="cta-right grid items-center justify-end">
             <div class="searchbox flex flex-col p-5 w-60 h-max">
                 <h6 class="text-center mb-5">Search for a car</h6>
-                <select class="my-3" name="brand" [value]="selectedBrand">
-                    <!-- <option value="">Brand</option> -->
+                <select (change)="brandChange()" class="my-3" name="brand" [formControl]="selectedBrand">
                     <option *ngFor="let brand of brands" value="{{brand}}">{{brand}}</option>
                 </select>
-                <select class="my-3" name="brand" [value]="selectedModel">
+                <select (change)="modelChange()" class="my-3" name="brand" [formControl]="selectedModel">
                     <option *ngFor="let model of models" value="{{model}}">{{model}}</option>
                 </select>
-                <select class="my-3" name="year" [value]="selectedYear">
+                <select (change)="yearChange()" class="my-3" name="year" [formControl]="selectedYear">
                     <option *ngFor="let year of years" value="{{year}}">{{year}}</option>
                 </select>
-                <button class="p-2 px-3 mt-3">Search</button>
+                <button (click)="handleSearch()" class="p-2 px-3 mt-3">Search</button>
+
+
             </div>
         </div>
     </div>
@@ -34,28 +35,58 @@
     <section class="bleed-secondary py-10" id="cars">
         <h2 class="text-center mb-5">Lets find your perfect car</h2>
         <div class="carlist grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3  gap-5">
-            <div class="carlisting w-40 flex flex-col justify-between" *ngFor="let car of cars">
-                <a routerLinkActive="active" routerLink="/cars/{{car.id}}">
-                    <div class="carlisting-img">
-                        <div class="carlisting-info">
-                            <div class="carlisting-info-tab">
-                                {{car.attributes.details.gearbox}}
+            <ng-container *ngIf="!filteredCars">
+                <div class="carlisting w-40 flex flex-col justify-between" *ngFor="let car of cars">
+                    <a class="h-full flex flex-col justify-between" routerLinkActive="active"
+                        routerLink="/cars/{{car.id}}">
+                        <div class="carlisting-img">
+                            <div class="carlisting-info">
+                                <div class="carlisting-info-tab">
+                                    Transmission: {{car.attributes.details.gearbox}}
+                                </div>
+                                <div class="carlisting-info-tab">
+                                    Motor: {{car.attributes.details.motor}}
+                                </div>
+                                <div class="carlisting-info-tab">
+                                    Drive unit: {{car.attributes.details.drivetrain}}
+                                </div>
                             </div>
-                            <div class="carlisting-info-tab">
-                                {{car.attributes.details.motor}}
-                            </div>
-                            <div class="carlisting-info-tab">
-                                {{car.attributes.details.drivetrain}}
-                            </div>
+                            <img class="mb-2 h-full w-full carimg object-cover object-center"
+                                src="{{car.attributes.imageUrl}}" alt="test">
                         </div>
-                        <img class="mb-2 carimg" src="{{car.attributes.imageUrl}}" alt="test">
-                    </div>
-                    <div class="carlisting-data">
-                        <h3>{{car.attributes.brand}} {{car.attributes.model}} - {{car.attributes.year}}</h3>
-                        <h3 class="price">${{car.attributes.price}}</h3>
-                    </div>
-                </a>
-            </div>
+                        <div class="carlisting-data">
+                            <h3>{{car.attributes.brand}} {{car.attributes.model}} - {{car.attributes.year}}</h3>
+                            <h3 class="price">${{car.attributes.price}}</h3>
+                        </div>
+                    </a>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="filteredCars">
+                <div class="carlisting w-40 flex flex-col justify-between" *ngFor="let car of filteredCars">
+                    <a class="h-full flex flex-col justify-between" routerLinkActive="active"
+                        routerLink="/cars/{{car.id}}">
+                        <div class="carlisting-img">
+                            <div class="carlisting-info">
+                                <div class="carlisting-info-tab">
+                                    Transmission: {{car.attributes.details.gearbox}}
+                                </div>
+                                <div class="carlisting-info-tab">
+                                    Motor: {{car.attributes.details.motor}}
+                                </div>
+                                <div class="carlisting-info-tab">
+                                    Drive unit: {{car.attributes.details.drivetrain}}
+                                </div>
+                            </div>
+                            <img class="mb-2 h-full w-full carimg object-cover object-center"
+                                src="{{car.attributes.imageUrl}}" alt="test">
+                        </div>
+                        <div class="carlisting-data">
+                            <h3>{{car.attributes.brand}} {{car.attributes.model}} - {{car.attributes.year}}</h3>
+                            <h3 class="price">${{car.attributes.price}}</h3>
+                        </div>
+                    </a>
+                </div>
+            </ng-container>
         </div>
     </section>
 </main>

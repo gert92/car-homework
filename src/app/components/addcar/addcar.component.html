@@ -1,0 +1,40 @@
+<app-nav></app-nav>
+<div class="register py-20 flex items-center justify-center">
+    <div class="signup">
+        <app-alert></app-alert>
+        <h6 class="mb-5">Add a Car</h6>
+        <form class="form grid md:grid-cols-2 gap-5 mb-5" [formGroup]="addCarForm" (ngSubmit)="onSubmit()">
+            <div class="form-main flex flex-col gap-5 mb-5">
+                <label class="flex flex-col">Brand
+                    <input type="text" formControlName="brand" required>
+                </label>
+                <label class="flex flex-col">Model
+                    <input type="text" formControlName="model" required>
+                </label>
+                <label class="flex flex-col">Year
+                    <input type="text" formControlName="year" required>
+                </label>
+                <label class="flex flex-col">Price
+                    <input type="text" formControlName="price" required>
+                </label>
+                <label class="flex flex-col">Image Url
+                    <input type="text" formControlName="imageUrl" required>
+                </label>
+            </div>
+            <div class="flex flex-col gap-5 mb-5" formGroupName="details">
+
+                <label class="flex flex-col">Transmission
+                    <input type="text" formControlName="gearbox" required>
+                </label>
+                <label class="flex flex-col">Motor
+                    <input type="text" formControlName="motor" required>
+                </label>
+                <label class="flex flex-col">Drive Unit
+                    <input type="text" formControlName="drivetrain" required>
+                </label>
+
+            </div>
+            <button class="md:col-span-2" type="submit">Save</button>
+        </form>
+    </div>
+</div>

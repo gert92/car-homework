@@ -1,5 +1,6 @@
 <div class="register h-screen flex items-center justify-center">
     <div class="signup">
+        <app-alert></app-alert>
         <h6 class="mb-5">Sign in</h6>
         <div class="form flex flex-col gap-5 mb-5">
             <label class="flex flex-col">Username
@@ -11,5 +12,7 @@
             <button (click)="handleLogin()">Sign In</button>
         </div>
         <p>Don't have an account? <a routerLinkActive="active" routerLink="/register">REGISTER</a></p>
+
+
     </div>
 </div>

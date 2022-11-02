@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AddcarComponent } from './components/addcar/addcar.component';
 // import { AppComponent } from './app.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
@@ -9,6 +10,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SingleCarComponent } from './components/single-car/single-car.component';
+import { AllcarsResolver } from './resolvers/allcars.resolver';
 import { CarResolverResolver } from './resolvers/car-resolver.resolver';
 import { CarownerResolver } from './resolvers/carowner.resolver';
 import { UserResolver } from './resolvers/UserResolver';
@@ -21,6 +23,14 @@ const routes: Routes = [
   {
     path: '',
     component: HomepageComponent,
+    resolve: {
+      user: UserResolver,
+      cars: AllcarsResolver
+    },
+  },
+  {
+    path: 'cars/add',
+    component: AddcarComponent,
     resolve: {
       user: UserResolver,
     },

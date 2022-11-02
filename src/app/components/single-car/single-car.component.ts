@@ -83,23 +83,25 @@ export class SingleCarComponent implements OnInit {
     const evaluation =
       Number.parseInt(this.user.balance!) - this.car.data.attributes.price;
     if (evaluation < 0) {
-      this.alerts = this.alertService.addAlert(
-        'Your budget is too low, GO GET SOME MORE MONEY!!!!',
-        'danger'
-      );
-      setTimeout(() => {
-        this.alerts = [];
-      }, 3000);
+      this.alertService
+        .addAlert(
+          'Your budget is too low, GO GET SOME MORE MONEY!!!!',
+          'danger'
+        )
+        .subscribe((alerts) => {
+          this.alerts = alerts;
+        });
       return;
     }
     this.user.balance = String(evaluation);
     this.authService.buyCar(car, this.user).subscribe((user) => {
       this.user = user;
       this.own = true;
-      this.alerts = this.alertService.addAlert('You bought a car!', 'success');
-      setTimeout(() => {
-        this.alerts = [];
-      }, 3000);
+      this.alertService
+        .addAlert('You bought a car!', 'success')
+        .subscribe((alerts) => {
+          this.alerts = alerts;
+        });
     });
   }
 }

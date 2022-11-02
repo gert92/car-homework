@@ -48,7 +48,8 @@
                         <span class="tracking-wide">My Cars</span>
                     </div>
                     <div class="my-4"></div>
-                    <div *ngFor="let car of myCars" class="lg:p-4 border-2 border-gray-200 border-opacity-60 rounded-lg lg:flex">
+                    <div *ngFor="let car of myCars"
+                        class="lg:px-2 border-2 border-gray-200 border-opacity-60 rounded-lg lg:flex items-center mb-2">
                         <img class="lg:h-24 md:h-48 object-cover object-center" src="{{car.attributes.imageUrl}}"
                             alt="blog cover" />
 
@@ -62,7 +63,8 @@
                                 <p class="inline-flex items-center">{{car.attributes.details.motor}} |
                                     {{car.attributes.details.gearbox}} | {{car.attributes.details.drivetrain}}</p>
 
-                                <button class="mr-3 inline-flex items-center  lg:ml-auto md:ml-0 ml-auto leading-none text-sm p-3 py-1">
+                                <button
+                                    class="mr-3 inline-flex items-center  lg:ml-auto md:ml-0 ml-auto leading-none text-sm p-3 py-1">
                                     Sell
                                 </button>
                             </div>
@@ -75,18 +77,7 @@
                 <!-- End of about section -->
 
                 <div class="my-4"></div>
-                <div *ngFor="let alert of alerts" class="flex  rounded-lg p-4 mb-4 text-sm {{alert.type}} alert"
-                    role="alert">
-                    <svg class="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                    <div>
-                        <span class="font-medium">{{alert.msg}}</span>
-                    </div>
-                </div>
+                <app-alert></app-alert>
                 <!-- End of profile tab -->
             </div>
         </div>

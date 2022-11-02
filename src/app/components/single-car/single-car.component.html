@@ -4,19 +4,7 @@
     <div class="single-car-wrapper p-10">
         <div class="single-car py-10 flex flex-col">
             <div class="car-header flex justify-between">
-                <div *ngFor="let alert of alerts" class="flex rounded-lg p-4 mb-4 text-sm {{alert.type}} alert"
-                    role="alert">
-                    <svg class="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                    <div>
-
-                        <span class="font-medium">{{alert.msg}}</span>
-                    </div>
-                </div>
+                <app-alert></app-alert>
                 <div class="ml-10">
                     <p *ngIf="user.id === 0">You need to be signed in to buy a car. </p>
                     <!-- <p *ngIf="user.id !== 0">Your Budget: {{user.balance}}<span>$</span></p> -->
@@ -66,9 +54,8 @@
                     </div>
                     <div class="car-main-right basis-3/6">
                         <div class="editableInputGroup">
-                        <img src="{{car.data.attributes.imageUrl}}" alt="">
-                        <input *ngIf="isEditing" type="text" name="imageUrl"
-                                        [formControl]="imageUrl">
+                            <img src="{{car.data.attributes.imageUrl}}" alt="">
+                            <input *ngIf="isEditing" type="text" name="imageUrl" [formControl]="imageUrl">
                         </div>
                     </div>
                 </div>

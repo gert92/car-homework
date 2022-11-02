@@ -24,13 +24,12 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.data.subscribe(({ user,cars}) => {
+    this.route.data.subscribe(({ user, cars }) => {
       this.user = user;
       this.myCars = cars.data;
       this.createdAt = new Date(user.createdAt).toDateString();
       this.balance.setValue(user.balance);
       console.log(cars);
-      
     });
   }
 
@@ -39,22 +38,18 @@ export class ProfileComponent implements OnInit {
     this.authService.updateUser(this.user).subscribe((user) => {
       if (user) {
         this.user = user;
-        this.alerts = this.alertService.addAlert(
-          'Profile updated successfully!',
-          'success'
-        );
-        setTimeout(() => {
-          this.alerts = [];
-        }, 3000);
+        this.alertService
+          .addAlert('Profile updated successfully!', 'success')
+          .subscribe((alerts) => {
+            this.alerts = alerts;
+          });
         return;
       }
-      this.alerts = this.alertService.addAlert(
-        'Something went wrong...',
-        'danger'
-      );
-      setTimeout(() => {
-        this.alerts = [];
-      }, 3000);
+      this.alertService
+        .addAlert('Something went wrong...', 'danger')
+        .subscribe((alerts) => {
+          this.alerts = alerts;
+        });
     });
   }
 }

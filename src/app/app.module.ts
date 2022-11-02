@@ -14,9 +14,11 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MainComponent } from './components/main/main.component';
 import { SubnavComponent } from './components/subnav/subnav.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AddcarComponent } from './components/addcar/addcar.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, HomepageComponent, LoginComponent, SingleCarComponent, NavComponent, FooterComponent, MainComponent, SubnavComponent, ProfileComponent],
+  declarations: [AppComponent, RegisterComponent, HomepageComponent, LoginComponent, SingleCarComponent, NavComponent, FooterComponent, MainComponent, SubnavComponent, ProfileComponent, AddcarComponent, AlertComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
