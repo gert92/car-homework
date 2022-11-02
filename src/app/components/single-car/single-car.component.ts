@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CarService } from 'src/app/services/car.service';
-import { Alert, Car, User } from 'src/app/types/types';
+import { Alert, ApiResponse, Car, User } from 'src/app/types/types';
 
 @Component({
   selector: 'app-single-car',
@@ -39,23 +39,24 @@ export class SingleCarComponent implements OnInit {
       this.isEditing = bool;
     });
     this.route.data.subscribe(({ user, car }) => {
+
       this.user = user;
-      this.car = car;
+      this.car = car.data;
 
       user.cars?.map((thisCar: Car) => {
-        if (thisCar.id === this.car.data.id) {
+        if (thisCar.id === this.car.id) {
           this.own = true;
         }
       });
 
-      this.carBrand.setValue(this.car.data.attributes.brand);
-      this.carModel.setValue(this.car.data.attributes.model);
-      this.carYear.setValue(this.car.data.attributes.year);
-      this.carPrice.setValue(this.car.data.attributes.price);
-      this.carGear.setValue(this.car.data.attributes.details.gearbox);
-      this.carMotor.setValue(this.car.data.attributes.details.motor);
-      this.imageUrl.setValue(this.car.data.attributes.imageUrl!);
-      this.carDriveTrain.setValue(this.car.data.attributes.details.drivetrain);
+      this.carBrand.setValue(this.car.attributes.brand);
+      this.carModel.setValue(this.car.attributes.model);
+      this.carYear.setValue(this.car.attributes.year);
+      this.carPrice.setValue(this.car.attributes.price);
+      this.carGear.setValue(this.car.attributes.details.gearbox);
+      this.carMotor.setValue(this.car.attributes.details.motor);
+      this.imageUrl.setValue(this.car.attributes.imageUrl!);
+      this.carDriveTrain.setValue(this.car.attributes.details.drivetrain);
     });
   }
 
@@ -73,19 +74,18 @@ export class SingleCarComponent implements OnInit {
         drivetrain: this.carDriveTrain.value!,
       },
     };
-    this.carService.updateCar(newCar).subscribe((car) => {
-      this.car = car;
+    this.carService.updateCar(newCar).subscribe((car: any) => {
+      this.car = car.data;
       this.carService.getIsEditing().next(false);
     });
   }
 
   buyCar(car: Car): void {
-    const evaluation =
-      Number.parseInt(this.user.balance!) - this.car.data.attributes.price;
+    const evaluation = this.user.balance - this.car.attributes.price;
     if (evaluation < 0) {
       this.alertService
         .addAlert(
-          'Your budget is too low, GO GET SOME MORE MONEY!!!!',
+          'Your balance is too low, GO GET SOME MORE MONEY!!!!',
           'danger'
         )
         .subscribe((alerts) => {
@@ -93,8 +93,10 @@ export class SingleCarComponent implements OnInit {
         });
       return;
     }
-    this.user.balance = String(evaluation);
-    this.authService.buyCar(car, this.user).subscribe((user) => {
+    this.user.balance = evaluation;
+    this.user.cars?.push(car);
+
+    this.authService.buyCar(this.user).subscribe((user) => {
       this.user = user;
       this.own = true;
       this.alertService

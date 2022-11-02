@@ -1,20 +1,5 @@
 export type Car = {
-  data: {
-    id: number;
-    attributes: {
-      brand: string;
-      model: string;
-      year: string;
-      imageUrl?: string;
-      price: number;
-      details: {
-        gearbox: string;
-        motor: string;
-        drivetrain: string;
-      };
-    };
-  };
-  id?: number;
+  id: number;
   attributes: {
     brand: string;
     model: string;
@@ -29,6 +14,22 @@ export type Car = {
   };
 };
 
+  // data: {
+  //   id: number;
+  //   attributes: {
+  //     brand: string;
+  //     model: string;
+  //     year: string;
+  //     imageUrl?: string;
+  //     price: number;
+  //     details: {
+  //       gearbox: string;
+  //       motor: string;
+  //       drivetrain: string;
+  //     };
+  //   };
+  // };
+
 export type User = {
   id?: number;
   jwt?: string;
@@ -39,10 +40,15 @@ export type User = {
   role?: {
     type?: string;
   };
-  balance?: string;
+  balance: number;
   createdAt?: string;
-  cars?: number[];
+  cars?: Car[];
   // loggedIn?: boolean;
+};
+
+export type ApiResponse = {
+  data: [];
+  meta: {};
 };
 
 export type Login = {

@@ -7,17 +7,17 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { CarService } from '../services/car.service';
-import { Car } from '../types/types';
+import { ApiResponse, Car } from '../types/types';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AllcarsResolver implements Resolve<Car[]> {
+export class AllcarsResolver implements Resolve<ApiResponse> {
   constructor(private carService: CarService) {}
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<Car[]> {
+  ): Observable<ApiResponse> {
     return this.carService.getCars();
   }
 }

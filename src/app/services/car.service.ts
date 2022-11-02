@@ -3,7 +3,7 @@ import { identifierName } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { API_TOKEN, API_URL } from '../config';
-import { Car } from '../types/types';
+import { ApiResponse, Car } from '../types/types';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -25,8 +25,8 @@ export class CarService {
 
   constructor(private http: HttpClient) {}
 
-  getCars(): Observable<any> {
-    return this.http.get<any>(this.carsUrl, httpOptions);
+  getCars(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(this.carsUrl, httpOptions);
   }
 
   getCar(id: number): Observable<Car> {

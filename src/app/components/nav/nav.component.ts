@@ -9,7 +9,7 @@ import { User } from 'src/app/types/types';
   styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
-  currentUser: User = {id: 0};
+  currentUser: User = {id: 0, balance: 0};
 
   constructor(
     private authService: AuthService,

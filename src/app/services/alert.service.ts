@@ -20,11 +20,18 @@ export class AlertService {
   }
 
   addAlert(msg: string, type: string): BehaviorSubject<Alert[]> {
-    // this.alert.next({ msg: msg, type: type });
-    this.alerts.next([{msg: msg, type: type}]);
-    setTimeout(()=> {
+    this.alerts.next([{ msg: msg, type: type }]);
+    setTimeout(() => {
       this.alerts.next([{}]);
-    }, 3000)
+    }, 3000);
     return this.alerts;
+  }
+
+  setAlerts(msg: string, type: string): Alert[] {
+    this.alerts.next([{ msg: msg, type: type }]);
+    setTimeout(() => {
+      this.alerts.next([{}]);
+    }, 3000);
+    return this.alerts.value;
   }
 }

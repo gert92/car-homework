@@ -10,7 +10,7 @@
                     <!-- <p *ngIf="user.id !== 0">Your Budget: {{user.balance}}<span>$</span></p> -->
                 </div>
                 <div class="car-pricetag py-2 px-8">
-                    <p *ngIf="!isEditing"><span>$ </span>{{car.data.attributes.price}}</p>
+                    <p *ngIf="!isEditing"><span>$ </span>{{car.attributes.price}}</p>
                     <span *ngIf="isEditing"> <input type="text" name="price" [formControl]="carPrice"></span>
                 </div>
             </div>
@@ -18,26 +18,26 @@
                 <div class="car-main flex gap-10">
                     <div class="car-main-left basis-3/6">
                         <div class="editableInputGroup flex gap-2 mb-5">
-                            <h2 *ngIf="!isEditing">{{car.data.attributes.brand}} {{car.data.attributes.model}}</h2>
+                            <h2 *ngIf="!isEditing">{{car.attributes.brand}} {{car.attributes.model}}</h2>
                             <input *ngIf="isEditing" type="text" name="brand" [formControl]="carBrand">
                             <input *ngIf="isEditing" type="text" name="model" [formControl]="carModel">
                         </div>
                         <div class="editableInputGroup">
                             <p>Motor:
-                                <span *ngIf="!isEditing">{{car.data.attributes.details.motor}}</span>
+                                <span *ngIf="!isEditing">{{car.attributes.details.motor}}</span>
                                 <span *ngIf="isEditing"><input type="text" name="motor" [formControl]="carMotor"></span>
                             </p>
                         </div>
                         <div class="editableInputGroup">
                             <p>Year:
-                                <span *ngIf="!isEditing">{{car.data.attributes.year}}</span>
+                                <span *ngIf="!isEditing">{{car.attributes.year}}</span>
                                 <span *ngIf="isEditing"><input type="text" name="year" [formControl]="carYear"></span>
                             </p>
 
                         </div>
                         <div class="editableInputGroup">
                             <p>Transmission:
-                                <span *ngIf="!isEditing">{{car.data.attributes.details.gearbox}}</span>
+                                <span *ngIf="!isEditing">{{car.attributes.details.gearbox}}</span>
                                 <span *ngIf="isEditing"><input type="text" name="gearbox"
                                         [formControl]="carGear"></span>
                             </p>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="editableInputGroup">
                             <p>Drive unit:
-                                <span *ngIf="!isEditing">{{car.data.attributes.details.drivetrain}}</span>
+                                <span *ngIf="!isEditing">{{car.attributes.details.drivetrain}}</span>
                                 <span *ngIf="isEditing"><input type="text" name="drivetrain"
                                         [formControl]="carDriveTrain"></span>
                             </p>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="car-main-right basis-3/6">
                         <div class="editableInputGroup">
-                            <img src="{{car.data.attributes.imageUrl}}" alt="">
+                            <img src="{{car.attributes.imageUrl}}" alt="">
                             <input *ngIf="isEditing" type="text" name="imageUrl" [formControl]="imageUrl">
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                         </svg>
                     </button>
                     <p *ngIf="own">You already own this car.</p>
-                    <button (click)="updateCar(car.data.id)" *ngIf="user.id !== 0 && isEditing"
+                    <button (click)="updateCar(car.id)" *ngIf="user.id !== 0 && isEditing"
                         class="p-2 flex items-center gap-2">Save</button>
                 </div>
             </div>

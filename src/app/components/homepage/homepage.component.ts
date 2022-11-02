@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CarService } from 'src/app/services/car.service';
 import { Car, User } from 'src/app/types/types';
@@ -12,11 +12,11 @@ import { Car, User } from 'src/app/types/types';
 })
 export class HomepageComponent implements OnInit {
   cars: Car[] = [];
-  filteredCars!: Car[];
+  filteredCars: Car[] = [];
   brands: string[] = [];
   models: string[] = [];
   years: string[] = [];
-  currentUser: User = { id: 0 };
+  currentUser: User = { id: 0, balance: 0 };
 
   selectedBrand = new FormControl('', [Validators.required]);
   selectedModel = new FormControl('', [Validators.required]);
@@ -25,6 +25,7 @@ export class HomepageComponent implements OnInit {
   constructor(
     private carService: CarService,
     private authService: AuthService,
+    private router: Router,
     private activatedRoute: ActivatedRoute // private router: Router
   ) {}
 
@@ -39,6 +40,15 @@ export class HomepageComponent implements OnInit {
         }
       });
     });
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        this.initialiseInvites();
+      }
+    });
+  }
+
+  initialiseInvites(): void {
+    this.filteredCars = [];
   }
 
   brandChange(): void {

@@ -10,7 +10,7 @@
                 has the breathtaking performance you expect from cars in this class, as well as a premium interior and
                 easy-to-use technology.</p>
             <!-- <button class="p-2 px-3 my-3" (click)="logData()">Learn more</button> -->
-            <button class="p-2 px-3 my-3">Learn more</button>
+            <button class="p-2 px-3 my-3" routerLinkActive="active" routerLink="/cars/1">Buy Now!</button>
         </div>
         <div class="cta-right grid items-center justify-end">
             <div class="searchbox flex flex-col p-5 w-60 h-max">
@@ -35,7 +35,7 @@
     <section class="bleed-secondary py-10" id="cars">
         <h2 class="text-center mb-5">Lets find your perfect car</h2>
         <div class="carlist grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3  gap-5">
-            <ng-container *ngIf="!filteredCars">
+            <ng-container *ngIf="filteredCars.length === 0">
                 <div class="carlisting w-40 flex flex-col justify-between" *ngFor="let car of cars">
                     <a class="h-full flex flex-col justify-between" routerLinkActive="active"
                         routerLink="/cars/{{car.id}}">
@@ -61,7 +61,7 @@
                     </a>
                 </div>
             </ng-container>
-            <ng-container *ngIf="filteredCars">
+            <ng-container *ngIf="filteredCars.length > 0">
                 <div class="carlisting w-40 flex flex-col justify-between" *ngFor="let car of filteredCars">
                     <a class="h-full flex flex-col justify-between" routerLinkActive="active"
                         routerLink="/cars/{{car.id}}">
