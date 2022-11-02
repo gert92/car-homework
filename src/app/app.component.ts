@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { AuthService } from './services/auth.service';
-import { User } from './types/types';
 
 @Component({
   selector: 'app-root',
