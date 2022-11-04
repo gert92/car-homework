@@ -15,23 +15,23 @@ export class RegisterComponent implements OnInit {
     Validators.required,
     Validators.minLength(6),
   ]);
-  email = new FormControl('', [Validators.required, Validators.email]);
+  // email = new FormControl('', [Validators.required, Validators.email]);
 
   // user!: User;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   handleRegister() {
-    if (this.username.invalid || this.password.invalid || this.email.invalid) {
+    if (this.username.invalid || this.password.invalid) {
       console.log('FORM INVALID');
       return;
     }
 
     const user: User = {
       username: this.username.value!,
-      email: this.email.value!,
+      // email: this.email.value!,
       password: this.password.value!,
-      balance: 0
+      balance: 0,
     };
 
     this.authService.register(user).subscribe((user) => {
